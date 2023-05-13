@@ -1,0 +1,38 @@
+downloading all repos
+===============================
+CNTX=users; NAME=Rajeev721; PAGE=1
+curl "https://api.github.com/$CNTX/$NAME/repos?page=$PAGE&per_page=100" |
+  grep -e 'clone_url*' |
+  cut -d \" -f 4 |
+  xargs -L1 git clone
+===================================
+delete repos 
+===================================
+repos=(
+	"Rajeev721/python"
+    "Rajeev721/spark"
+    "Rajeev721/airflow-tutorial"
+    "Rajeev721/LogicMojo"
+    "Rajeev721/airflow-docker"
+    "Rajeev721/apache-spark-programming-with-databricks"
+    "Rajeev721/data-analysis-with-databricks-sql"
+    "Rajeev721/advanced-data-engineering-with-databricks"
+    "Rajeev721/ztm-python-cheat-sheet"
+    "Rajeev721/introduction-to-python-for-data-science-and-data-engineering"
+    "Rajeev721/spark-training"
+    "Rajeev721/optimizing-apache-spark-on-databricks"
+    "Rajeev721/My-TechNotes-kumar"
+    "Rajeev721/just-enough-scala-for-spark"
+    "Rajeev721/elt-with-spark-sql"
+    "Rajeev721/All-Python-codes-of-ZTM-course-by-Andrei-Neagoie"
+    "Rajeev721/streaming-lakehouse"
+    "Rajeev721/DSA-Python"
+    "Rajeev721/spark-local-execution"
+)
+
+for i in "${repos[@]}"
+do
+   : 
+   echo 'Delete' "$i";
+   curl -XDELETE -H 'Authorization: token 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' "https://api.github.com/repos/$i";
+done
