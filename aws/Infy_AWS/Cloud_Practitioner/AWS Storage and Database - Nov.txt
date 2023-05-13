@@ -1,0 +1,121 @@
+Storage : 
+
+https://www.redhat.com/en/topics/data-storage/file-block-object-storage
+
+EBS : Elastic Block storage
+
+-> purpose : transaction intensive workloads
+->Permanent  or temporary?
+	Ans : Permanent
+
+-> Volumes - 
+	v1 -> vm1
+	v1-> vm2 -////not possible
+	
+	-> AZ specific
+	->>>>Both EC2 and EBS volumes should be there in same AZ
+	
+	If diff region -> take a snap of ebs -> copy it to region -> create a vol and attach it to ec2 
+->snapshots - incremental backup in ebs
+Ex: snap 1 - 2gb
+	snap 2 - 2.5gb
+	------->2.5 gb
+	
+Working -> 
+
+1) vol - attach ec2
+		snap -> vol ->attach ec2 instamces
+		snap -> create a image ->create a ec2 instance
+		
+2) create a instance  -> specify the ebs vol
+
+
+---> 
+
+instance storage - 8
+root volume (ebs) - 8gb
+volumes - 150 gb
+
+---> attach 20 volumes to one single ec2 instance
+
+Delete - if snap is taken as AMI, then directly cannot delete the sanp...have to deregister and delete.
+
+EFS  - linux system
+
+--->Serverless persistent file storage system
+---->create file system -mount it to ec2 instances 
+->shrinking and growing -> has no cost
+
+
+--->Types:
+
+1)Standard - sundcriptions(monthly or yearly)
+2)EFS IA - price is based on performance
+
+
+**********After creating EC2 instance - df -T -h(mounting)
+
+FSx - Windows
+
+
+									Database
+									
+->DynamoDB [Regional specific service]
+
+
+	
+	-->Serverless
+	--->table - place to store and query data
+		
+			Source /Parent table - mumbai[101  mysore    9178674678345745437]
+	--->unstructured data
+		EX:
+			      EmpId  location Phone numer
+					
+					101  mysore    9178674678345745437
+					
+****	---->scalable & highly performace - milliseconds responds
+
+	--->Documnet and key value store models
+	
+	
+******** Capacity provisioning
+
+		1)on demand mode - post paid
+		2)Provisioning capacity (Default)- pre paid
+		
+				100Rs recharge - 1  monthl
+				7 more days - 50 rs[on demand]
+				
+******Replication - Global tables
+
+	Child Table - ohio [101  mysore    9178674678345745437]
+				
+
+******Data streams - item operations logs
+
+-> Amazon kinesis - analysis 
+->AWS DynamoDB - storage 
+
+
+******TTL
+
+	epoch time value 
+		Google convertors ->search for the timestamp
+		https://www.epochconverter.com/
+		
+		
+				Migration:
+				
+				
+6 r's
+rehosting
+replatform - lift and shift
+repurchasing
+refactor/rearchitecting   --------costly and time consuming
+retire
+retain
+
+
+AWS DMS - for databases
+AWS Migration hub   ------ single  location
