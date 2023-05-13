@@ -1,0 +1,287 @@
+Welcome to day 1 of Storage, Database and Migration services!
+
+Lex Link:
+https://lex.infosysapps.com/en/app/toc/lex_auth_012654736627400704113/overview
+
+Attendance Link:
+http://iscls4apps/ITMS/Learning/Index
+
+Agenda:
+
+S3
+EFS
+EBS
+Storage gateway
+AWS backup 
+
+S3:
+
+Simple storage service
+object storage solution offered by AWS 
+global service
+
+EBS volume -- 10GB 
+S3 --> capacity planning not needed
+store any kind of data , massive amounts of data 
+buckets -- a container to hold your objects -- specify the region 
+objects -- actual data/content 
+every object -- key , version id -- uniquely identify your objects , value , metadata 
+free tier -- 5 GB of standard storage per month 
+max file size of single object -- 5TB 
+
+
+S3 benefits:
+scalability 
+no limits on storage
+high availability , durability 
+
+S3 use cases:
+Backup 
+Archival 
+Data store
+Hosting static web content 
+
+Versioning:
+
+coffee.jpg -- ver id -- 123
+coffee.jpg -- ver id -- 234
+multiple variants of the same file -- enable the versioning option
+version id --> unique number which will be given to every object
+
+when versioning is disabled?
+version id --> null 
+
+additional level of protection
+
+without versioning
+file --> delete it --> permanently deleted from my bucket 
+
+with versioning
+file --> delete it --> delete marker ---> delete it permanently 
+
+
+Storage classes:
+S3 standard: access data frequently 
+S3 standard IA: less frequently accessed data, older images, older log files 
+S3 one zone IA: data is stored in only 1AZ, secondary backups 
+S3 intelligent tiering: not sure of access pattern 
+S3 glacier: 
+S3 glacier deep archive: cheapest storage class 
+
+except for one zone IA --> data redundantly stored in >=3 AZs of the regions
+
+Lifecycle rules:
+
+1 file --> standard IA
+1 file --> glacier
+1 file --> standard --. 30 days --> standard IA --> 100 --> Glacier 
+
+Ex: cctv footages -- you might want to move it from hot storage to cold storage 
+
+why ??
+-- reducing costs 
+
+
+lifecycle rules vs Intelligent tiering?
+
+lifecycle rules move data across all storage classes
+
+Intelligent tiering
+between standard and standard IA
+object --> 30 days continuously
+standard --> standard IA
+if it is accessed
+standard IA --> standard
+
+
+Folder -- input/
+key --> input/beach.jpg 
+can be filtered based on - prefix, object tags 
+
+Pricing:
+https://aws.amazon.com/s3/pricing/
+
+Storage prices: based on the storage class
+
+Data transfer: 
+Free:
+Data in from the internet 
+Data transferred between S3 buckets in the same AWS Region.
+
+Charged for:
+Data OUT to internet or any other AWS region 
+S3 bucket --mumbai --> transfer data --> S3 bucket -- ohio 
+
+Data retrieval 
+
+
+S3 Replication:
+
+S3 --> region 
+within same region --> Same region replication (SRR) 
+Ex: different logging buckets --> centralize all of them in a bucket 
+
+different region --> Cross region replication (CRR) 
+Ex: Disaster recovery 
+
+once replication is enabled --> data added after this --> only will be replicated
+
+bucket1 --> img1, img2, enabled replication , img3 , img4
+bucket2 --> img3 , img4
+
+Asynchronous but quick 
+
+---------------------------------------------------------------------
+
+EBS:
+persistent storage solution for EC2 instances
+bound by AZ
+can be attached to only one EC2 instance at a time
+specify the storage capacity 
+
+snapshot:
+similar volume --> different region, or diff AZ in the same region 
+backup purpose 
+incremental snapshots 
+
+EFS:
+file storage
+shared storage for linux machines
+scaling 
+
+----------------------------------------------------------------------
+
+RDS -- oracle, mysql
+Elasticache
+DynamoDB
+
+Database services:
+
+Managed database services/ have your own database on EC2 instance
+
+
+Have your own database on EC2 instance:
+
+AWS:  Server maintainance, Os installation
+User: Os patches, DB sw installs, DB sw patches, backups , scaling, Application 
+
+Managed database services:
+
+admin activities
+
+Relational databases: RDS, redshift 
+Non relational databases: DynamoDB, elasticache, neptune 
+
+RDS:
+Relational database service
+SQL -- query language 
+structured data , fixed schema 
+Database engines: MySQL, Oracle, Microsoft SQL, MAriaDB, PostgreSQL, Aurora
+
+Provisioning of the database, underlying OS patching 
+Continuous backups -- 7 day retention period -- DB snapshots 
+monitoring dashboards
+
+RDS - auto scaling:
+
+Initial storage capacity : 20 GB 
+Enable auto scaling -- option 
+Max limit: 1000GB 
+
+Read replicas:
+
+Multi AZ:
+Primary database -- application is making reads/write
+standby database -- created in different AZ
+
+synchronous communication 
+
+write anything to primary, written to standby -->
+
+Primary fails, automatically failover to standby 
+
+Security grp --> what traffic is allowed to your database instance
+
+
+Read replicas:
+
+reduce the read traffic load on database
+
+Primary database --> read/writes
+Analytics --> read operation
+
+can create upto 5 read replicas 
+Aurora -- 15 read replicas 
+
+asynchronous communication 
+
+Read replicas --> can be in a different region
+
+Additional cost??? --> yes
+
+
+sudo yum install mysql mysql-server -y
+
+mysql -h <database-1.c00klbmbtwxa.ap-south-1.rds.amazonaws.com> -u <username> -p
+
+
+Elasticache:
+
+Caching:
+
+Application ---> Caching layer(in memory databases) --> Database 
+
+
+Cache hit -- finds data in cache 
+Cache miss -- fetch data from database, written into cache 
+
+
+https://aws.amazon.com/caching/
+
+Redis/ Memcached
+
+Elasticache: -- AWS 
+
+Managed service -- redis/ memcached 
+
+https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html
+
+in memory database with high performance and low latency 
+
+
+Read replica vs elasticache:
+
+Applications --> read replica -- to reduce read load on database 
+
+Session data:
+user login details, shopping cart details 
+
+https://aws.amazon.com/elasticache/
+
+Qwiklabs:
+https://amazon.qwiklabs.com/focuses/14265?catalog_rank=%7B%22rank%22%3A2%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&parent=catalog&search_id=14628305
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

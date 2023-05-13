@@ -1,0 +1,205 @@
+Welcome to day2 of services overview
+
+Course link:
+
+https://lex.infosysapps.com/en/viewer/video/lex_auth_013117835312586752201?collectionId=lex_auth_012638472045789184157&collectionType=Course
+
+Recap:
+
+EC2:Elastic compute cloud
+IaaS
+Virtual instance 
+
+Region selection 
+
+AMI , instance type, storage, tags, security groups, keypairs
+
+Pricing models:
+On demand, Reserved, Spot 
+
+Tenancy: Shared, Dedicated 
+
+Beanstalk: PAAS --> virtual server + runtime platform 
+Lambda: FAAS, serverless service
+
+
+Storage services:
+
+S3:
+Global service
+simple storage service
+can store any amount of data 
+any kind of data --> text, audio, video 
+no --> storage capacity 
+
+buckets -- container 
+Objects -- actual data + metadata
+
+benefits:
+highly scalable 
+availability : 99.99% 
+durability: 11 9's 
+
+Storage classes:
+
+S3 standard: for frequently accessed data 
+S3 Standard IA: less frequently access data, use case: backups
+S3 one zone IA: less frequently access data, only in 1 AZ, use case: secondary backups, easily recreatable data 
+S3 intelligent tiering: no idea of access pattern, automation and monitoring 
+Data --> accessed --> standard --> 30 days --> standard IA --> accessed --> standard 
+
+S3 glacier: for archival purpose, retrival time -- less 
+S3 glacier deep archive: cheapest , retrival time -- more
+
+
+Redundantly storing your data:
+in atleast 3 diff AZs of the region 
+
+One zone --> stored in 1 AZ
+
+Create a bucket, adding objects 
+
+Name, Select the region
+
+
+EBS:
+Elastic block storage:
+block storage 
+as additional storage for your EC2 
+Ec2 deleted --> delete on termination is enabled --> EBS volumes will also be deleted
+
+
+VPC:
+Virtual Private cloud
+setup logically isolated segment
+configure the firewall rules -- incoming and outgoing traffic
+launch resources inside VPC --> Ec2 instances 
+define and control 
+Regional service
+
+Create a VPC -> set of IP addresses --> CIDR notation
+IPv4 addresses --> 32 bits 
+
+CIDR notation:
+
+IP address/netmasking value 
+
+10.0.0.0/24 --> 10.0.0.0 to 10.0.0.255 --> 256 IP address
+
+8 bits --> 00000000 -- 11111111 
+
+10.0.0.0/16 --> 10.0.0.0 to 10.0.255.255 --> 2^16 --> 65536 IP address  
+
+
+10.0.0.0/24 --> 10.0.0.x --> 2^(32-24) --> 2^8
+
+10.0.0.0/16 --> 2^(32-16) --> 2^16
+
+10.0.0.0/x  --> 2^(32-x) 
+
+10.0.0.0/32 --> 1 IP address
+
+
+ 
+
+
+Components of VPC:
+
+Subnets: division of VPC into smaller sections
+
+VPC --> 10.0.0.0/16
+Subnet1 --> 10.0.0.0/24
+Subnet2 --> 10.0.1.0/24
+
+CIDR range of subnet --> subset of VPC CIDR range, multiple subnets --> no overlapping IP address range 
+ 
+selecting VPC, subnet 
+
+will be in single AZ
+
+Subnet 1 -> 10.0.0.0/24 --> 256 IP addresses 
+Available Ip addresses --> which can be given to resources --> 251
+
+5 Ip addresses/subnet --> reserved by AWS
+first four and last one --> will be reserved --> 10.0.0.0, 1, 2 , 3 ... 10.0.0.255
+
+for network address
+VPC local router, DNS server, future use
+Network broadcast addresses
+
+Route tables:
+set of rules --> guides your traffic
+Every subnet --> can have 1 RT at max associated to it 
+1 RT --> subnet1, subnet2
+
+Custom Route tables
+Main Route table 
+
+
+VPC --> 10.0.0.0/16
+Subnet1 --> 10.0.0.0/24
+Subnet2 --> 10.0.1.0/24
+
+
+10.0.0.0/16  target - local 
+
+the resources within the Same VPC --> can be in diff subnets --> they can easily communicate
+
+NACLs , Security groups
+
+
+
+
+Internet Gateway
+
+
+Database services:
+
+Database considerations?? 
+Type of data --> structured, flexbile schema
+
+Relational database:RDS, Redshift 
+Non Relational databases: DynamoDB, ElasticCache, Neptune
+
+RDS:
+Managed relational database offering
+
+Why not deploy database in EC2 instance?? 
+
+DB updates, backups --> Managed by us
+
+lot of administration work 
+
+Advantages:
+-- Scaling abilities -- scaling is dynamic
+-- Multi AZ --> Disaster recovery 
+-- monitoring dashboards 
+
+6 database engines:
+MySQL, Oracle,  MicrosoftSQL, PostgreSQL, MariaDB, Aurora
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
